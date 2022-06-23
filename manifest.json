@@ -1,6 +1,6 @@
 {
 	"name": "isitpwned",
-	"description": "When you visit a website its say if the website have been breached in the past.",
+	"description": "When you visit a website it tells you if the website have been breached in the past.",
 	"version": "0.1",
 	"manifest_version": 2,
 	"browser_action": {
