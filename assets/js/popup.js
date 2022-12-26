@@ -51,7 +51,7 @@ function fetchApi(query){
 			let dataClass = data.DataClasses;
 			// get link href data
 			let link = document.querySelector(".next-btn").href;
-			link = link.replace("notfound", satus).replace("inpbreachdate", breachdData).replace("inppwncount", pwnCount).replace("inpdesc", description).replace("inpdataclass", dataClass);
+			link = link.replace("inpstatus", satus).replace("inpbreachdate", breachdData).replace("inppwncount", pwnCount).replace("inpdesc", description).replace("inpdataclass", dataClass);
 			document.querySelector(".next-btn").href = link;
 		})
 	} catch(except){ }
