@@ -22,24 +22,38 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
 // fetch data from haveibeenpwned api
 function fetchApi(query){
 	try{
+		let satus = 0;
 		// calling haveibeenpwned api
 		fetch('https://haveibeenpwned.com/api/v3/breach/'+query)
 			.then(response => {
-				const satus = response.status;
+				satus = response.status;
 				if(satus == 200){
 					let isPwnelm = document.getElementById("sub-para4");
-					isPwnelm.innerHTML = "😨 Oops Pwned Found";
+					isPwnelm.innerText = "😨 Oops Pwned Found";
 					document.getElementById("sub-para4").style.color = "red";
 					return response.json();
 				} else {
 					let isPwnelm = document.getElementById("sub-para4");
-					isPwnelm.innerHTML = "😊 No Pwned Found";
+					isPwnelm.innerText = "😊 No Pwned Found";
 					document.getElementById("sub-para4").style.color = "green";
 					return false;
 				}
 		}).then(data => {
 			// console.log(data);
-		})	
+			let breachdData = data.BreachDate;
+			// Pwn Count
+			let pwnCount = data.PwnCount;
+			// Description
+			const expretion = /<(.*?)>/g;	// expretion to remove html tags
+			let description = data.Description;
+			description = description.replace(expretion, "");
+			// leaked data
+			let dataClass = data.DataClasses;
+			// get link href data
+			let link = document.querySelector(".next-btn").href;
+			link = link.replace("notfound", satus).replace("inpbreachdate", breachdData).replace("inppwncount", pwnCount).replace("inpdesc", description).replace("inpdataclass", dataClass);
+			document.querySelector(".next-btn").href = link;
+		})
 	} catch(except){ }
 }
 
@@ -56,7 +70,7 @@ function fetchIpaddress(){
 				}
 		}).then(data => {
 			let elementOne = document.getElementById("sub-para1");
-			elementOne.innerHTML = data.query;
+			elementOne.innerText = data.query;
 		})	
 	} catch(except){ }
 }
