@@ -40,15 +40,15 @@ function fetchApi(query){
 				}
 		}).then(data => {
 			// console.log(data);
-			let breachdData = data.BreachDate;
+			let breachdData = encodeURIComponent(data.BreachDate);
 			// Pwn Count
-			let pwnCount = data.PwnCount;
+			let pwnCount = encodeURIComponent(data.PwnCount);
 			// Description
 			const expretion = /<(.*?)>/g;	// expretion to remove html tags
 			let description = data.Description;
-			description = description.replace(expretion, "");
+			description = encodeURIComponent(description.replace(expretion, ""));
 			// leaked data
-			let dataClass = data.DataClasses;
+			let dataClass = encodeURIComponent(data.DataClasses);
 			// get link href data
 			let link = document.querySelector(".next-btn").href;
 			link = link.replace("inpstatus", satus).replace("inpbreachdate", breachdData).replace("inppwncount", pwnCount).replace("inpdesc", description).replace("inpdataclass", dataClass);

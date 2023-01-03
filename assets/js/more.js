@@ -9,15 +9,11 @@ function findMatch(url, param) {
 	return res ? res[1] : null;
 }
 
-function deocdeData(data){
-	return data.replaceAll('%20', ' ').replaceAll('%22', '"');
-}
-
 function showData(){
 	if(findMatch(urlData, 'status') == '200'){
 		for(let i = 0; i < keys.length; i++){
 			let data = findMatch(urlData, keys[i]);
-			document.querySelector(`.${keys[i]}`).innerText = deocdeData(data);
+			document.querySelector(`.${keys[i]}`).innerText = decodeURIComponent(data);
 		}
 	}
 }
