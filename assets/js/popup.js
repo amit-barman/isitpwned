@@ -1,4 +1,4 @@
-// isitpwned v0.1
+// isitpwned v0.2
 // By Amit Barman
 chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
 	function(tabs){
@@ -39,26 +39,29 @@ function fetchApi(query){
 					return false;
 				}
 		}).then(data => {
-			// console.log(data);
-			let breachdData = encodeURIComponent(data.BreachDate);
-			// Pwn Count
-			let pwnCount = encodeURIComponent(data.PwnCount);
-			// Description
-			const expretion = /<(.*?)>/g;	// expretion to remove html tags
-			let description = data.Description;
-			description = encodeURIComponent(description.replace(expretion, ""));
-			// leaked data
-			let dataClass = encodeURIComponent(data.DataClasses);
-			// get link href data
-			let link = document.querySelector(".next-btn").href;
-			link = link.replace("inpstatus", satus).replace("inpbreachdate", breachdData).replace("inppwncount", pwnCount).replace("inpdesc", description).replace("inpdataclass", dataClass);
-			document.querySelector(".next-btn").href = link;
+			try {
+				// console.log(data);
+				let breachdData = encodeURIComponent(data.BreachDate);
+				// Pwn Count
+				let pwnCount = encodeURIComponent(data.PwnCount);
+				// Description
+				const expretion = /<(.*?)>/g;	// expretion to remove html tags
+				let description = data.Description;
+				description = encodeURIComponent(description.replace(expretion, ""));
+				// leaked data
+				let dataClass = encodeURIComponent(data.DataClasses);
+				// get link href data
+				let link = document.querySelector(".next-btn").href;
+				// replace default url parameters's data with api data
+				link = link.replace("inpstatus", satus).replace("inpbreachdate", breachdData).replace("inppwncount", pwnCount).replace("inpdesc", description).replace("inpdataclass", dataClass);
+				document.querySelector(".next-btn").href = link;
+			} catch(except){ }
 		})
 	} catch(except){ }
 }
 
 // fetch IP address using ip api
-function fetchIpaddress(){
+(function fetchIpaddress(){
 	try{
 		fetch('http://ip-api.com/json')
 			.then(response => {
@@ -69,9 +72,10 @@ function fetchIpaddress(){
 					return false;
 				}
 		}).then(data => {
-			let elementOne = document.getElementById("sub-para1");
-			elementOne.innerText = data.query;
+			try {
+				let elementOne = document.getElementById("sub-para1");
+				elementOne.innerText = data.query;
+			} catch(except){ }
 		})	
 	} catch(except){ }
-}
-fetchIpaddress();
+})();
