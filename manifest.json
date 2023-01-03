@@ -1,9 +1,10 @@
 {
+	"manifest_version": 3,
 	"name": "isitpwned",
 	"description": "When you visit a website it tells you if the website have been breached in the past.",
-	"version": "0.1",
-	"manifest_version": 2,
-	"browser_action": {
+	"author": "Amit Barman",
+	"version": "0.2",
+	"action": {
 		"default_popup": "popup.html",
 		"default_icon": "images/icon.png"
 	},
