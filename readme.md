@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 # Isitpwned
 -----------
 ## Screenshots
@@ -20,4 +17,3 @@ data have been breached in the past.
 # Created By
 
 @Amit Barman
->>>>>>> master
