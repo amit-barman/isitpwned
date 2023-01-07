@@ -3,18 +3,22 @@
 chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
 	function(tabs){
 		try{
-			const paragraph = (tabs[0].url);
+			const rawUrl = (tabs[0].url);
 			const regtodomain = /^(?:https?:)?(?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n]+)/im;
-			const domain = paragraph.match(regtodomain);
-			const regex = /\.([^.]+)\./;
-			const found = domain[0].match(regex);
-			let elementTwo = document.getElementById("sub-para2");
-			elementTwo.innerHTML = found[1];
+			const domain = rawUrl.match(regtodomain);
+			const regtogetDomainname = /\.([^.]+)\./;
+			const anotherregtogetDomainname = /\/\/([^.]+)\./;
+			let found = domain[0].match(regtogetDomainname);
+			found = found ? found : domain[0].match(anotherregtogetDomainname);
+			if(found != null){
+				let elementTwo = document.getElementById("sub-para2");
+				elementTwo.innerText = found[1];
 
-			let elementThree = document.getElementById("sub-para3");
-			elementThree.innerHTML = domain[0];
+				let elementThree = document.getElementById("sub-para3");
+				elementThree.innerText = domain[0];
 
-			fetchApi(found[1]);
+				fetchApi(found[1]);
+			}
 		} catch(except){ }
 	}
 );
