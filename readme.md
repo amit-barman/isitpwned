@@ -11,8 +11,7 @@
 
 ## What is Isitpwned ?
 
-Isitpwend is a simple google chrome browser extension, when you visit a website it tells you if the website's 
-data have been breached in the past.
+Isitpwend is a simple and user friendly Google Chrome browser extension, when you visit a website it informs you whether the website's data has previously experienced a security breach.
 
 # Created By
 
